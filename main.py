@@ -11,4 +11,4 @@ templates = Jinja2Templates(directory="templates")
 app.include_router(pages.router)
 
 if __name__ == '__main__':
-    uvicorn.run(app='main:app', host='127.0.0.1', port=8081, reload=True)
+    uvicorn.run(app='main:app', host='0.0.0.0', port=80, reload=True)
