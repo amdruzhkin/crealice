@@ -12,8 +12,6 @@ templates = Jinja2Templates(directory="templates")
 
 app.include_router(pages.router)
 
-# Function to check if the request is from a common search bot
-
 
 def is_search_bot(request: Request):
     user_agent = request.headers.get("User-Agent", "").lower()
@@ -44,10 +42,11 @@ async def sitemap(request: Request):
     else:
         raise HTTPException(status_code=404, detail="Not Found")
 
+
 if __name__ == '__main__':
     uvicorn.run(app='main:app',
                 host='0.0.0.0',
                 port=80)
-                # ssl_certfile='certificates/certificate.crt',
-                # ssl_keyfile='certificates/certificate.key',
-                # ssl_ca_certs='certificates/certificate_ca.crt')
+    # ssl_certfile='certificates/certificate.crt',
+    # ssl_keyfile='certificates/certificate.key',
+    # ssl_ca_certs='certificates/certificate_ca.crt')

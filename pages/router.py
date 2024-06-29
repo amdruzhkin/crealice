@@ -5,6 +5,7 @@ templates = Jinja2Templates(directory="templates")
 
 router = APIRouter()
 
+
 @router.get('/')
 async def home(request: Request):
     context = {
@@ -16,6 +17,7 @@ async def home(request: Request):
     }
     return templates.TemplateResponse(name='index.html', request=request, context=context)
 
+
 @router.get('/services')
 async def home(request: Request):
     context = {
@@ -26,6 +28,7 @@ async def home(request: Request):
         }
     }
     return templates.TemplateResponse(name='services.html', request=request, context=context)
+
 
 @router.get('/about')
 async def home(request: Request):
