@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pages
@@ -11,10 +11,13 @@ templates = Jinja2Templates(directory="templates")
 app.include_router(pages.router)
 
 # Function to check if the request is from a common search bot
+
+
 def is_search_bot(request: Request):
     user_agent = request.headers.get("User-Agent", "").lower()
     common_bots = ["googlebot", "yandexbot", "bingbot", "baiduspider"]
     return any(bot in user_agent for bot in common_bots)
+
 
 @app.get("/robots.txt")
 async def robots(request: Request):
@@ -26,6 +29,7 @@ async def robots(request: Request):
             raise HTTPException(status_code=404, detail="robots.txt not found")
     else:
         raise HTTPException(status_code=404, detail="Not Found")
+
 
 @app.get("/sitemap.xml")
 async def sitemap(request: Request):
@@ -45,5 +49,3 @@ if __name__ == '__main__':
                 # ssl_certfile='certificates/certificate.crt',
                 # ssl_keyfile='certificates/certificate.key',
                 # ssl_ca_certs='certificates/certificate_ca.crt')
-
-
